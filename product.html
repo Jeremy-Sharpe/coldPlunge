@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platypus Plunge Pro | Premium Cold Plunge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script type="text/javascript">
+        window.onload = function() {
+            // Get all radio inputs for product type
+            const productTypeInputs = document.querySelectorAll('input[name="product-type"]');
+            const mainImage = document.querySelector('#main-product-image');
+            const thumbnailContainers = document.querySelectorAll('.thumbnail-container');
+            
+            // Store the current main image src
+            let currentMainSrc = mainImage.src;
+
+            const tubImage = ["plunge.png", "onlytub.png"]
+            const bathImage = ["bathtubfront.png", "bathtubsize.png"]
+            
+            // Function to update images based on product selection
+            function updateImages(productType) {
+                currentMainSrc = productType === 'bathtub' ? 'bathtubfront.png' : 'plunge.png';
+
+                const priceElements = document.querySelectorAll('.top-page-price');
+                priceElements.forEach(element => {
+
+
+                    element.textContent = productType === 'bathtub' ? 'RM4,999' : 'RM3,999';
+                });
+
+                const priceElementsFull = document.querySelectorAll('.top-page-price-full');
+                priceElementsFull.forEach(element => {
+
+                    element.textContent = productType === 'bathtub' ? 'RM5,499' : 'RM4,499';
+                });
+
+
+                
+
+                mainImage.src = currentMainSrc;
+                thumbnailContainers.forEach(container => {
+                    const img = container.querySelector('img');
+                    if (!img.classList.contains('static-thumbnail')) {
+
+
+                        if (productType === 'bathtub') {
+                            if (img.classList.contains('photo-one')) {
+                            img.src = bathImage[0];
+                        } else if (img.classList.contains('photo-two')) {
+                            img.src = bathImage[1];
+                        }
+                        
+                        }
+                        else{
+                            if (img.classList.contains('photo-one')) {
+                            img.src = tubImage[0];
+                        } else if (img.classList.contains('photo-two')) {
+                            img.src = tubImage[1];
+                        }
+
+                        }
+
+                        
+
+                    }
+                });
+            }
+            
+            // Add hover functionality to thumbnails
+            thumbnailContainers.forEach(container => {
+                const thumbnailImg = container.querySelector('img');
+                
+                container.addEventListener('mouseenter', () => {
+                    // Save current main image src before changing
+                    const tempSrc = mainImage.src;
+                    mainImage.src = thumbnailImg.src;
+                });
+                
+                container.addEventListener('mouseleave', () => {
+                    mainImage.src = currentMainSrc;
+                });
+            });
+            
+            // Add change event listener to radio inputs
+            productTypeInputs.forEach(input => {
+                input.addEventListener('change', (e) => {
+                    updateImages(e.target.value);
+                });
+            });
+        }
+    </script>
+</head>
+<body class="bg-white">
+    <!-- Navigation Bar -->
+    <nav class="fixed w-full bg-white/95 backdrop-blur-sm z-50 border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0 flex items-center">
+                    <img src="logo.png" alt="Platypus Plunge Logo" class="h-8 w-auto mr-3">
+                    <a href="index.html" class="text-2xl font-bold text-blue-900">Platypus Plunge</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="benefits.html" class="text-gray-700 hover:text-blue-900">Benefits</a>
+                        <a href="about.html" class="text-gray-700 hover:text-blue-900">About</a>
+                        <a href="contact.html" class="text-gray-700 hover:text-blue-900">Contact</a>
+                        <a href="product.html" class="bg-blue-900 text-white px-6 py-2 rounded-full hover:bg-blue-800 transition">
+                            Shop Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Product Hero -->
+    <section class="pt-32 pb-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Product Images -->
+                <div class="space-y-4">
+                    <div class="bg-blue-50 rounded-2xl p-8">
+                        <img id="main-product-image" src="plunge.png" alt="Platypus Plunge Pro" class="w-full rounded-xl">
+                    </div>
+                    <div class="grid grid-cols-4 gap-4">
+                        <div class="thumbnail-container bg-blue-50 p-2 rounded-lg cursor-pointer hover:bg-blue-100">
+                            <img src="plunge.png" alt="Side View" class="rounded product-thumbnail photo-one">
+                        </div>
+                        <div class="thumbnail-container bg-blue-50 p-2 rounded-lg cursor-pointer hover:bg-blue-100">
+                            <img src="onlytub.png" alt="Front View" class="rounded product-thumbnail photo-two">
+                        </div>
+                        <div class="thumbnail-container bg-blue-50 p-2 rounded-lg cursor-pointer hover:bg-blue-100">
+                            <img src="sideviewchiller.png" alt="Interior View" class="rounded static-thumbnail">
+                        </div>
+                        <div class="thumbnail-container bg-blue-50 p-2 rounded-lg cursor-pointer hover:bg-blue-100">
+                            <img src="chillerback.png" alt="Control Panel" class="rounded static-thumbnail">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="space-y-6">
+                    <h1 class="text-4xl font-bold text-blue-900">Platypus Plunge Pro</h1>
+                    <div class="flex items-center gap-4">
+                        <span class="text-3xl font-bold text-blue-900 top-page-price">RM3,999</span>
+                        <span class="text-lg text-gray-500 line-through top-page-price-full">RM4,499</span>
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Save RM500</span>
+                    </div>
+
+                    <!-- Quick Specs -->
+                    <div class="border-t border-b py-4 grid grid-cols-3 gap-4">
+                        <div>
+                            <p class="text-gray-600 text-sm">Dimensions</p>
+                            <p class="font-medium">7' x 3.5' x 4'</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600 text-sm">Temperature Range</p>
+                            <p class="font-medium">39°F - 55°F</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600 text-sm">Capacity</p>
+                            <p class="font-medium">250 Gallons</p>
+                        </div>
+                    </div>
+
+                    <!-- Purchase Options -->
+                    <div class="space-y-4">
+                        <div class="mb-6">
+                            <h3 class="text-lg font-semibold text-blue-900 mb-3">Select Your Product Type</h3>
+                            <div class="flex gap-4">
+                                <label class="flex-1">
+                                    <input type="radio" name="product-type" value="plunge" class="hidden peer" checked>
+                                    <div class="border-2 border-gray-200 rounded-xl p-4 text-center cursor-pointer peer-checked:border-blue-900 peer-checked:bg-blue-50 hover:border-blue-900 transition">
+                                        <h4 class="font-semibold text-blue-900">Plunge Tub</h4>
+                                        <p class="text-sm text-gray-600">Specialized cold therapy tub</p>
+                                        <p class="text-blue-900 font-bold mt-2">RM3,999</p>
+                                    </div>
+                                </label>
+                                <label class="flex-1">
+                                    <input type="radio" name="product-type" value="bathtub" class="hidden peer">
+                                    <div class="border-2 border-gray-200 rounded-xl p-4 text-center cursor-pointer peer-checked:border-blue-900 peer-checked:bg-blue-50 hover:border-blue-900 transition">
+                                        <h4 class="font-semibold text-blue-900">Bath Tub</h4>
+                                        <p class="text-sm text-gray-600">Traditional style with cold features</p>
+                                        <p class="text-blue-900 font-bold mt-2">RM4,999</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="block w-full bg-blue-900 text-white py-4 rounded-full hover:bg-blue-800 transition text-center">
+                            Buy Now
+                        </a>
+                    </div>
+
+                    <!-- Key Features -->
+                    <div class="space-y-4">
+                        <h2 class="text-xl font-bold text-blue-900">Key Features</h2>
+                        <ul class="space-y-2">
+                            <li class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span>Smart temperature control system</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span>Triple-stage filtration</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span>Energy-efficient cooling system</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span>Mobile app connectivity</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Shipping Info -->
+                    <div class="bg-blue-50 p-4 rounded-xl space-y-2">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="font-medium">Free Delivery</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="font-medium">1 Year Warranty</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Specifications -->
+    <section class="py-20 bg-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-blue-900 mb-12">Technical Specifications</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="font-bold mb-2">Dimensions & Capacity</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>External: 7' L x 3.5' W x 4' H</li>
+                            <li>Internal: 6' L x 2.5' W x 3.5' H</li>
+                            <li>Water Capacity: 250 Gallons</li>
+                            <li>Weight (Empty): 320 lbs</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold mb-2">Electrical</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>220V / 60Hz</li>
+                            <li>15 amp dedicated circuit required</li>
+                            <li>Energy efficient operation</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="font-bold mb-2">Features</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>Digital temperature control</li>
+                            <li>Triple-stage filtration system</li>
+                            <li>UV sanitization</li>
+                            <li>Smart device connectivity</li>
+                            <li>LED interior lighting</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold mb-2">Materials</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li>Medical-grade stainless steel interior</li>
+                            <li>Double-walled insulation</li>
+                            <li>UV-resistant exterior finish</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add this section before the Technical Specifications section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-blue-900 mb-12 text-center">Advanced Features</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Temperature Control -->
+                <div class="bg-blue-50 p-8 rounded-2xl">
+                    <h3 class="text-xl font-bold text-blue-900 mb-4">
+                        Precise Temperature Control
+                    </h3>
+                    <img src="temp-control-feature.jpg" alt="Temperature Control System" class="rounded-xl mb-4">
+                    <p class="text-gray-600 mb-4">
+                        Our advanced cooling system maintains temperatures between 39°F and 55°F with precision accuracy. Digital controls allow for 1-degree increments, ensuring your perfect cold therapy experience.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Digital temperature display</li>
+                        <li>• Rapid cooling capability</li>
+                        <li>• Temperature memory settings</li>
+                    </ul>
+                </div>
+
+                <!-- Filtration System -->
+                <div class="bg-blue-50 p-8 rounded-2xl">
+                    <h3 class="text-xl font-bold text-blue-900 mb-4">
+                        Advanced Filtration
+                    </h3>
+                    <img src="filtration-feature.jpg" alt="Filtration System" class="rounded-xl mb-4">
+                    <p class="text-gray-600 mb-4">
+                        Triple-stage filtration system ensures crystal-clear water and minimal maintenance. UV sanitization provides additional protection against bacteria and contaminants.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• UV sanitization</li>
+                        <li>• Automatic cleaning cycles</li>
+                        <li>• Easy filter replacement</li>
+                    </ul>
+                </div>
+
+                <!-- Smart Controls -->
+                <div class="bg-blue-50 p-8 rounded-2xl">
+                    <h3 class="text-xl font-bold text-blue-900 mb-4">
+                        Smart Device Integration
+                    </h3>
+                    <img src="smart-feature.jpg" alt="Smart Controls" class="rounded-xl mb-4">
+                    <p class="text-gray-600 mb-4">
+                        Control your Platypus Plunge from anywhere using our mobile app. Schedule cooling times, monitor temperature, and receive maintenance alerts.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Mobile app control</li>
+                        <li>• Usage analytics</li>
+                        <li>• Smart scheduling</li>
+                    </ul>
+                </div>
+
+                <!-- Energy Efficiency -->
+                <div class="bg-blue-50 p-8 rounded-2xl">
+                    <h3 class="text-xl font-bold text-blue-900 mb-4">
+                        Energy Efficient Design
+                    </h3>
+                    <img src="efficiency-feature.jpg" alt="Energy Efficiency" class="rounded-xl mb-4">
+                    <p class="text-gray-600 mb-4">
+                        Engineered for optimal energy efficiency with double-walled insulation and smart power management, reducing operating costs while maintaining performance.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Double-walled insulation</li>
+                        <li>• Smart power management</li>
+                        <li> Energy usage monitoring</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html> 
